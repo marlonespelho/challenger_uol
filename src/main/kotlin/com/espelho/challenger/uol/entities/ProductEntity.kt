@@ -11,7 +11,7 @@ data class ProductEntity(
         @Column
         private val id: UUID = UUID.randomUUID(),
         @Column
-        private val name: String,
+        private val name: String = "",
         @Column
-        private val weight: Double) {
+        private val weight: Double = 0.0) {
 }

@@ -11,6 +11,6 @@ class ShippingCompanyEntity(
         @Column
         override val id: UUID = UUID.randomUUID(),
         @Column
-        override val name: String) : Person {
+        override val name: String = "") : Person {
 
 }

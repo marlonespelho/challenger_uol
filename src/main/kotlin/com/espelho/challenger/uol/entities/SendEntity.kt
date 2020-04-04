@@ -10,11 +10,11 @@ data class SendEntity(
         private val id: UUID = UUID.randomUUID(),
         @ManyToOne
         @JoinColumn(name = "present")
-        private val present: PresentEntity,
+        private val present: PresentEntity = PresentEntity(),
         @ManyToOne
         @JoinColumn(name = "price_rule")
-        private val priceRule: PriceRuleEntity,
+        private val priceRule: PriceRuleEntity = PriceRuleEntity(),
         @Column(name = "send_value")
-        private val sendValue: Double
+        private val sendValue: Double = 0.0
         ) {
 }
