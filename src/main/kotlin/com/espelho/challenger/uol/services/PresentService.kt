@@ -2,11 +2,14 @@ package com.espelho.challenger.uol.services
 
 import com.espelho.challenger.uol.entities.PresentEntity
 import com.espelho.challenger.uol.repositories.PresentRepository
+import com.espelho.challenger.uol.repositories.SendRepository
+import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 
-class PresentService(private val presentRepository: PresentRepository) {
-    fun save(present: PresentEntity) {
-        this.presentRepository.save(present);
+class PresentService(@Autowired private val presentRepository: PresentRepository,
+                     @Autowired private val sendRepository: SendRepository) {
+    fun save(present: PresentEntity): PresentEntity {
+        return this.presentRepository.save(present)
     }
 
     fun delete(id : UUID) {

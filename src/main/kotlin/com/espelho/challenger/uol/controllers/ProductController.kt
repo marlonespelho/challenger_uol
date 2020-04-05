@@ -1,17 +1,68 @@
 package com.espelho.challenger.uol.controllers
 
-import com.espelho.challenger.uol.repositories.ProductRepository
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import com.espelho.challenger.uol.entities.ProductEntity
+import com.espelho.challenger.uol.services.ProductService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.dao.EmptyResultDataAccessException
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import java.lang.Exception
+import java.util.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("api/product")
 @CrossOrigin(origins = ["*"])
-class ProductController(private val productRepository: ProductRepository) {
+class ProductController(@Autowired private val productService: ProductService) {
 
-    fun getAll() {
+    @GetMapping
+    fun getAll() : ResponseEntity<List<ProductEntity>> {
+        val products = this.productService.getAll()
+        return ResponseEntity.ok(products)
+    }
 
+    @GetMapping("/{id}")
+    fun getById(@PathVariable(value = "id") id: UUID) : ResponseEntity<ProductEntity>? {
+        return productService.getById(id).map { product -> ResponseEntity.ok(product) }
+                .orElse(ResponseEntity.notFound().build())
+    }
+
+    @GetMapping("/name/{name}")
+    fun getByName(@PathVariable(value = "name") name: String) : ResponseEntity<List<ProductEntity>>? {
+        return productService.getByName(name).map { products -> ResponseEntity.ok().body(products) }
+                .orElse(ResponseEntity.notFound().build())
+    }
+
+    @PostMapping
+    fun createProduct(@Valid @RequestBody product: ProductEntity) : ResponseEntity<ProductEntity>{
+        try{
+            var response = this.productService.save(product);
+            return ResponseEntity.ok(response);
+        }catch (exception: Exception) {
+            return ResponseEntity.badRequest().build()
+        }
+    }
+
+    @PutMapping
+    fun updateProduct(@Valid @RequestBody product: ProductEntity) : ResponseEntity<ProductEntity>{
+        try {
+            var response = this.productService.save(product);
+            return ResponseEntity.ok(response);
+        }catch (exception: Exception) {
+            return ResponseEntity.badRequest().build()
+        }
+    }
+
+    @DeleteMapping()
+    fun deleteProduct(@Valid @RequestBody product: ProductEntity): ResponseEntity<String> {
+        try {
+            this.productService.delete(product.id)
+            return ResponseEntity.ok("Deleted")
+        } catch (exception: EmptyResultDataAccessException) {
+            return ResponseEntity.notFound().build()
+        } catch (exception: Exception) {
+            return ResponseEntity.badRequest().build()
+        }
     }
 
 }

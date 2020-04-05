@@ -9,9 +9,10 @@ import javax.persistence.Id
 data class ProductEntity(
         @Id
         @Column
-        private val id: UUID = UUID.randomUUID(),
-        @Column
-        private val name: String = "",
-        @Column
-        private val weight: Double = 0.0) {
+        val id: UUID = UUID.randomUUID(),
+        @Column(nullable = false)
+        val name: String = "",
+        @Column(nullable = false)
+        val weight: Double = 0.0) {
+
 }

@@ -7,16 +7,16 @@ import javax.persistence.*
 class PriceRuleEntity (
         @Id
         @Column
-        private val id: UUID = UUID.randomUUID(),
+        val id: UUID = UUID.randomUUID(),
         @ManyToOne
         @JoinColumn(name = "id_shipping_company")
-        private val shippingCompany: ShippingCompanyEntity = ShippingCompanyEntity(),
+        val shippingCompany: ShippingCompanyEntity = ShippingCompanyEntity(),
         @Column(name = "weight_min")
-        private val weightMin: Double = 0.0,
+        val weightMin: Double = 0.0,
         @Column(name = "weight_max")
-        private val weightMax: Double = 0.0,
+        val weightMax: Double = 0.0,
         @Column(name = "fixed_value")
-        private val fixedValue: Double = 0.0,
+        val fixedValue: Double = 0.0,
         @Column(name = "distance_value")
-        private val distanceValue: Double = 0.0) {
+        val distanceValue: Double = 0.0) {
 }

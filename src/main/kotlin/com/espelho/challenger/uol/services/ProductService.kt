@@ -11,15 +11,15 @@ class ProductService(
         @Autowired
         private val productRepository: ProductRepository) {
 
-    fun save(product: ProductEntity) {
-       this.productRepository.save(product);
+    fun save(product: ProductEntity): ProductEntity {
+       return this.productRepository.save(product);
     }
 
     fun delete(id : UUID) {
         return this.productRepository.deleteById(id);
     }
 
-    fun getAll(): MutableList<ProductEntity> {
+    fun getAll(): List<ProductEntity> {
         return this.productRepository.findAll();
     }
 

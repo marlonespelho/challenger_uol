@@ -5,8 +5,8 @@ import com.espelho.challenger.uol.repositories.PriceRuleRepository
 import java.util.*
 
 class PriceRuleService(private val priceRuleRepository: PriceRuleRepository) {
-    fun save(priceRule: PriceRuleEntity) {
-        this.priceRuleRepository.save(priceRule);
+    fun save(priceRule: PriceRuleEntity): PriceRuleEntity {
+        return this.priceRuleRepository.save(priceRule);
     }
 
     fun delete(id : UUID) {

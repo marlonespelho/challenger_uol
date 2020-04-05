@@ -7,14 +7,14 @@ import javax.persistence.*
 data class SendEntity(
         @Id
         @Column
-        private val id: UUID = UUID.randomUUID(),
+        val id: UUID = UUID.randomUUID(),
         @ManyToOne
         @JoinColumn(name = "present")
-        private val present: PresentEntity = PresentEntity(),
+        val present: PresentEntity = PresentEntity(),
         @ManyToOne
         @JoinColumn(name = "price_rule")
-        private val priceRule: PriceRuleEntity = PriceRuleEntity(),
+        val priceRule: PriceRuleEntity = PriceRuleEntity(),
         @Column(name = "send_value")
-        private val sendValue: Double = 0.0
+        val sendValue: Double = 0.0
         ) {
 }

@@ -7,10 +7,10 @@ import javax.persistence.*
 data class PresentEntity(
         @Id
         @Column
-        private val id: UUID = UUID.randomUUID(),
+        val id: UUID = UUID.randomUUID(),
         @Column
-        private val distance: Double = 0.0,
+        val distance: Double = 0.0,
         @ManyToOne
         @JoinColumn(name = "id_product")
-        private val product : ProductEntity = ProductEntity()) {
+        val product : ProductEntity = ProductEntity()) {
 }

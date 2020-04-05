@@ -10,8 +10,8 @@ class ShippingCompanyService(
         @Autowired
         private val shippingCompanyRepository: ShippingCompanyRepository) {
     
-    fun save(shippingCompanyEntity: ShippingCompanyEntity) {
-        this.shippingCompanyRepository.save(shippingCompanyEntity);
+    fun save(shippingCompanyEntity: ShippingCompanyEntity): ShippingCompanyEntity {
+        return this.shippingCompanyRepository.save(shippingCompanyEntity);
     }
 
     fun delete(id : UUID) {
