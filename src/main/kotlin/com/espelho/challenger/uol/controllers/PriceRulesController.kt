@@ -11,7 +11,7 @@ import java.util.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("api/price-rules")
+@RequestMapping("api/price-rule")
 @CrossOrigin(origins = ["*"])
 class PriceRulesController(@Autowired private val priceRuleService: PriceRuleService) {
 

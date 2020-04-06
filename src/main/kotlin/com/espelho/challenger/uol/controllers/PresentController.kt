@@ -11,9 +11,10 @@ import java.util.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("api/presents")
+@RequestMapping("api/present")
 @CrossOrigin(origins = ["*"])
-class PresentController(@Autowired private val presentService: PresentService) {
+class PresentController(@Autowired
+                        val presentService: PresentService) {
 
     @GetMapping
     fun getAll() : ResponseEntity<MutableList<PresentEntity>> {

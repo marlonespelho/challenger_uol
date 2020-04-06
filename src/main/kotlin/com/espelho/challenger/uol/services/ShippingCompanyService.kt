@@ -4,8 +4,10 @@ import com.espelho.challenger.uol.entities.ProductEntity
 import com.espelho.challenger.uol.entities.ShippingCompanyEntity
 import com.espelho.challenger.uol.repositories.ShippingCompanyRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 import java.util.*
 
+@Service
 class ShippingCompanyService(
         @Autowired
         private val shippingCompanyRepository: ShippingCompanyRepository) {

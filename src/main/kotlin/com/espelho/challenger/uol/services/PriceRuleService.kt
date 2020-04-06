@@ -2,9 +2,12 @@ package com.espelho.challenger.uol.services
 
 import com.espelho.challenger.uol.entities.PriceRuleEntity
 import com.espelho.challenger.uol.repositories.PriceRuleRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 import java.util.*
 
-class PriceRuleService(private val priceRuleRepository: PriceRuleRepository) {
+@Service
+class PriceRuleService(@Autowired private val priceRuleRepository: PriceRuleRepository) {
     fun save(priceRule: PriceRuleEntity): PriceRuleEntity {
         return this.priceRuleRepository.save(priceRule);
     }
