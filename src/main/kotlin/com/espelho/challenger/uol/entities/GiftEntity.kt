@@ -3,8 +3,8 @@ package com.espelho.challenger.uol.entities
 import java.util.*
 import javax.persistence.*
 
-@Entity(name = "present")
-data class PresentEntity(
+@Entity(name = "gift")
+data class GiftEntity(
         @Id
         @Column
         val id: UUID = UUID.randomUUID(),

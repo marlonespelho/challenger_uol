@@ -7,4 +7,7 @@ import java.util.*
 
 @Repository
 interface SendRepository : JpaRepository<SendEntity, UUID> {
+    fun findByOrderByGiftProductNameAscSendValueAsc(): Optional<List<SendEntity>>
+    fun findByGiftProductNameOrderByGiftProductNameAscSendValueAsc(giftProductName: String): Optional<List<SendEntity>>
+    fun findByGiftProductIdOrderByGiftProductNameAscSendValueAsc(giftProductId: UUID): Optional<List<SendEntity>>
 }

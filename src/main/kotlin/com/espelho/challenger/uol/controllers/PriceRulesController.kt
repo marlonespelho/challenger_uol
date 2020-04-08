@@ -16,19 +16,31 @@ import javax.validation.Valid
 class PriceRulesController(@Autowired private val priceRuleService: PriceRuleService) {
 
     @GetMapping
-    fun getAll(): ResponseEntity<MutableList<PriceRuleEntity>> {
-        val priceRules = this.priceRuleService.getAll()
+    fun getPriceRules(): ResponseEntity<MutableList<PriceRuleEntity>> {
+        val priceRules = this.priceRuleService.getPriceRules()
         return ResponseEntity.ok(priceRules)
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable(value = "id") id: UUID): ResponseEntity<PriceRuleEntity>? {
+    fun getPriceRule(@PathVariable(value = "id") id: UUID): ResponseEntity<PriceRuleEntity>? {
         return priceRuleService.getById(id).map { priceRule -> ResponseEntity.ok(priceRule) }
                 .orElse(ResponseEntity.notFound().build())
     }
 
+    @GetMapping("/shipping-company/{id}")
+    fun getPriceRulesByShippingCompany(@PathVariable(value = "id") shippingCompanyId: UUID): ResponseEntity<List<PriceRuleEntity>>? {
+        return priceRuleService.getByShippingCompany(shippingCompanyId).map { priceRule -> ResponseEntity.ok(priceRule) }
+                .orElse(ResponseEntity.notFound().build())
+    }
+
+    @GetMapping("/shipping-company/name/{name}")
+    fun getPriceRulesByShippingCompany(@PathVariable(value = "name") shippingCompanyName: String): ResponseEntity<List<PriceRuleEntity>>? {
+        return priceRuleService.getByShippingCompany(shippingCompanyName).map { priceRule -> ResponseEntity.ok(priceRule) }
+                .orElse(ResponseEntity.notFound().build())
+    }
+
     @PostMapping
-    fun createShippingCompany(@Valid @RequestBody priceRuleEntity: PriceRuleEntity):
+    fun createPriceRule(@Valid @RequestBody priceRuleEntity: PriceRuleEntity):
             ResponseEntity<PriceRuleEntity> {
         try {
             var response = this.priceRuleService.save(priceRuleEntity)
@@ -39,7 +51,7 @@ class PriceRulesController(@Autowired private val priceRuleService: PriceRuleSer
     }
 
     @PutMapping
-    fun updateShippingCompany(@Valid @RequestBody priceRuleEntity: PriceRuleEntity):
+    fun updatePriceRule(@Valid @RequestBody priceRuleEntity: PriceRuleEntity):
             ResponseEntity<PriceRuleEntity> {
         try {
             var response = this.priceRuleService.save(priceRuleEntity)
@@ -50,7 +62,7 @@ class PriceRulesController(@Autowired private val priceRuleService: PriceRuleSer
     }
 
     @DeleteMapping()
-    fun deleteShippingCompany(@Valid @RequestBody priceRuleEntity: PriceRuleEntity): ResponseEntity<String> {
+    fun deletePriceRule(@Valid @RequestBody priceRuleEntity: PriceRuleEntity): ResponseEntity<String> {
         try {
             this.priceRuleService.delete(priceRuleEntity.id)
             return ResponseEntity.ok("Deleted")

@@ -9,8 +9,8 @@ data class SendEntity(
         @Column
         val id: UUID = UUID.randomUUID(),
         @ManyToOne
-        @JoinColumn(name = "present")
-        val present: PresentEntity = PresentEntity(),
+        @JoinColumn(name = "gift")
+        val gift: GiftEntity = GiftEntity(),
         @ManyToOne
         @JoinColumn(name = "price_rule")
         val priceRule: PriceRuleEntity = PriceRuleEntity(),

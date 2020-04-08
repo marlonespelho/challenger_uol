@@ -17,20 +17,20 @@ import javax.validation.Valid
 class ShippingCompanyController(@Autowired private val shippingCompanyService: ShippingCompanyService) {
 
     @GetMapping
-    fun getAll(): ResponseEntity<MutableList<ShippingCompanyEntity>> {
-        val shippingCompanies = this.shippingCompanyService.getAll()
+    fun getShippingCompanies(): ResponseEntity<MutableList<ShippingCompanyEntity>> {
+        val shippingCompanies = this.shippingCompanyService.getShippingCompanies()
         return ResponseEntity.ok(shippingCompanies)
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable(value = "id") id: UUID): ResponseEntity<ShippingCompanyEntity>? {
-        return shippingCompanyService.getById(id).map { shippingCompany -> ResponseEntity.ok(shippingCompany) }
+    fun getShippingCompany(@PathVariable(value = "id") id: UUID): ResponseEntity<ShippingCompanyEntity>? {
+        return shippingCompanyService.getShippingCompanies(id).map { shippingCompany -> ResponseEntity.ok(shippingCompany) }
                 .orElse(ResponseEntity.notFound().build())
     }
 
     @GetMapping("/name/{name}")
-    fun getByName(@PathVariable(value = "name") name: String): ResponseEntity<List<ShippingCompanyEntity>>? {
-        return shippingCompanyService.getByName(name).map { shippingCompany -> ResponseEntity.ok().body(shippingCompany) }
+    fun getShippingCompanies(@PathVariable(value = "name") name: String): ResponseEntity<List<ShippingCompanyEntity>>? {
+        return shippingCompanyService.getShippingCompanies(name).map { shippingCompany -> ResponseEntity.ok().body(shippingCompany) }
                 .orElse(ResponseEntity.notFound().build())
     }
 

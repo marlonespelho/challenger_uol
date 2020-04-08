@@ -13,14 +13,25 @@ import java.util.*
 @CrossOrigin(origins = ["*"])
 class SendController(@Autowired private val sendService: SendService) {
     @GetMapping
-    fun getAll(): ResponseEntity<MutableList<SendEntity>> {
-        val sends = this.sendService.getAll()
+    fun getSends(): ResponseEntity<Optional<List<SendEntity>>> {
+        val sends = this.sendService.getSends()
         return ResponseEntity.ok(sends)
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable(value = "id") id: UUID): ResponseEntity<SendEntity>? {
-        return sendService.getById(id).map { send -> ResponseEntity.ok(send) }
+    fun getSend(@PathVariable(value = "id") id: UUID): ResponseEntity<SendEntity>? {
+        return sendService.getSends(id).map { send -> ResponseEntity.ok(send) }
+                .orElse(ResponseEntity.notFound().build())
+    }
+
+    @GetMapping("/product/{id}")
+    fun getSendsByProductId(@PathVariable(value = "id") productId: UUID): ResponseEntity<List<SendEntity>>? {
+        return sendService.getSendsByProduct(productId).map{ send -> ResponseEntity.ok(send) }.orElse(ResponseEntity.notFound().build())
+    }
+
+    @GetMapping("/product/name/{name}")
+    fun getSendsByProductName(@PathVariable(value = "name") productName: String): ResponseEntity<List<SendEntity>>? {
+        return sendService.getSendsByProduct(productName).map{ send -> ResponseEntity.ok().body(send) }
                 .orElse(ResponseEntity.notFound().build())
     }
 

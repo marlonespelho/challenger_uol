@@ -19,15 +19,15 @@ class ProductService(
         return this.productRepository.deleteById(id);
     }
 
-    fun getAll(): List<ProductEntity> {
+    fun getProducts(): List<ProductEntity> {
         return this.productRepository.findAll();
     }
 
-    fun getById(id: UUID): Optional<ProductEntity> {
+    fun getProducts(id: UUID): Optional<ProductEntity> {
         return this.productRepository.findById(id);
     }
 
-    fun getByName(name: String): Optional<List<ProductEntity>> {
+    fun getProducts(name: String): Optional<List<ProductEntity>> {
         return this.productRepository.findByName(name);
     }
 

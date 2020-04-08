@@ -8,4 +8,5 @@ import java.util.*
 @Repository
 interface PriceRuleRepository : JpaRepository<PriceRuleEntity, UUID> {
     fun findByShippingCompanyId(shippingCompanyId: UUID): Optional<List<PriceRuleEntity>>
+    fun findByShippingCompanyName(shippingCompanyName: String): Optional<List<PriceRuleEntity>>
 }

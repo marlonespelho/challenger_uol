@@ -20,15 +20,15 @@ class ShippingCompanyService(
         return this.shippingCompanyRepository.deleteById(id);
     }
 
-    fun getAll(): MutableList<ShippingCompanyEntity> {
+    fun getShippingCompanies(): MutableList<ShippingCompanyEntity> {
         return this.shippingCompanyRepository.findAll();
     }
 
-    fun getById(id: UUID): Optional<ShippingCompanyEntity> {
+    fun getShippingCompanies(id: UUID): Optional<ShippingCompanyEntity> {
         return this.shippingCompanyRepository.findById(id);
     }
 
-    fun getByName(name: String): Optional<List<ShippingCompanyEntity>> {
+    fun getShippingCompanies(name: String): Optional<List<ShippingCompanyEntity>> {
         return this.shippingCompanyRepository.findByName(name);
     }
 }

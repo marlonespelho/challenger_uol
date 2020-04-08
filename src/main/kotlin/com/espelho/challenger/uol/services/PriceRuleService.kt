@@ -16,15 +16,19 @@ class PriceRuleService(@Autowired private val priceRuleRepository: PriceRuleRepo
         return this.priceRuleRepository.deleteById(id);
     }
 
-    fun getAll(): MutableList<PriceRuleEntity> {
-        return this.priceRuleRepository.findAll();
+    fun getPriceRules(): MutableList<PriceRuleEntity> {
+        return this.priceRuleRepository.findAll()
     }
 
     fun getById(id: UUID): Optional<PriceRuleEntity> {
-        return this.priceRuleRepository.findById(id);
+        return this.priceRuleRepository.findById(id)
     }
 
-    fun getByProductId(shippingCompanyId: UUID): Optional<List<PriceRuleEntity>> {
-        return this.priceRuleRepository.findByShippingCompanyId(shippingCompanyId);
+    fun getByShippingCompany(shippingCompanyId: UUID): Optional<List<PriceRuleEntity>> {
+        return this.priceRuleRepository.findByShippingCompanyId(shippingCompanyId)
+    }
+
+    fun getByShippingCompany(shippingCompanyName: String): Optional<List<PriceRuleEntity>> {
+        return this.priceRuleRepository.findByShippingCompanyName(shippingCompanyName)
     }
 }

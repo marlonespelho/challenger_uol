@@ -16,20 +16,20 @@ import javax.validation.Valid
 class ProductController(@Autowired private val productService: ProductService) {
 
     @GetMapping
-    fun getAll() : ResponseEntity<List<ProductEntity>> {
-        val products = this.productService.getAll()
+    fun getProducts() : ResponseEntity<List<ProductEntity>> {
+        val products = this.productService.getProducts()
         return ResponseEntity.ok(products)
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable(value = "id") id: UUID) : ResponseEntity<ProductEntity>? {
-        return productService.getById(id).map { product -> ResponseEntity.ok(product) }
+    fun getProduct(@PathVariable(value = "id") id: UUID) : ResponseEntity<ProductEntity>? {
+        return productService.getProducts(id).map { product -> ResponseEntity.ok(product) }
                 .orElse(ResponseEntity.notFound().build())
     }
 
     @GetMapping("/name/{name}")
-    fun getByName(@PathVariable(value = "name") name: String) : ResponseEntity<List<ProductEntity>>? {
-        return productService.getByName(name).map { products -> ResponseEntity.ok().body(products) }
+    fun getProducts(@PathVariable(value = "name") name: String) : ResponseEntity<List<ProductEntity>>? {
+        return productService.getProducts(name).map { products -> ResponseEntity.ok().body(products) }
                 .orElse(ResponseEntity.notFound().build())
     }
 
