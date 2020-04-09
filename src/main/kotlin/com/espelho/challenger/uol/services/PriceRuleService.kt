@@ -31,4 +31,16 @@ class PriceRuleService(@Autowired private val priceRuleRepository: PriceRuleRepo
     fun getByShippingCompany(shippingCompanyName: String): Optional<List<PriceRuleEntity>> {
         return this.priceRuleRepository.findByShippingCompanyName(shippingCompanyName)
     }
+
+    fun getPriceRules(priceRules: List<PriceRuleEntity>, weight: Double): ArrayList<PriceRuleEntity> {
+        val priceRulesAccepted = ArrayList<PriceRuleEntity>()
+        priceRules.forEach { priceRule ->
+            run {
+                if (weight >= priceRule.weightMin && weight <= priceRule.weightMax) {
+                    priceRulesAccepted.add(priceRule)
+                }
+            }
+        }
+        return priceRulesAccepted
+    }
 }

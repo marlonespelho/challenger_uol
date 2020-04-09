@@ -28,25 +28,15 @@ class SendService(@Autowired private val sendRepository: SendRepository,
     }
 
     fun createSends(gift: GiftEntity) {
-        val priceRulesAccepted: ArrayList<PriceRuleEntity> = this.getPriceRules(this.priceRuleService.getPriceRules() ,gift.product.weight)
+        val priceRulesAccepted: ArrayList<PriceRuleEntity>
+                = this.priceRuleService.getPriceRules(this.priceRuleService.getPriceRules(), gift.product.weight)
         persistSendsByGift(priceRulesAccepted, gift)
     }
 
-    private fun calculatePrice(gift: GiftEntity, priceRule: PriceRuleEntity): Double {
+    public fun calculatePrice(gift: GiftEntity, priceRule: PriceRuleEntity): Double {
         return priceRule.fixedValue + (gift.product.weight * gift.distance * priceRule.distanceValue)
     }
 
-    private fun getPriceRules(priceRules: List<PriceRuleEntity>, weight: Double): ArrayList<PriceRuleEntity> {
-        val priceRulesAccepted = ArrayList<PriceRuleEntity>()
-        priceRules.forEach { priceRule ->
-            run {
-                if (weight >= priceRule.weightMin && weight <= priceRule.weightMax) {
-                    priceRulesAccepted.add(priceRule)
-                }
-            }
-        }
-        return priceRulesAccepted
-    }
 
     fun delete(id : UUID) {
         return this.sendRepository.deleteById(id);
